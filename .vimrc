@@ -32,6 +32,7 @@ Plug 'jiangmiao/auto-pairs', {'on': 'PAIRSToggle'}
 Plug 'w0rp/ale', { 'on':  'ALEToggle'  }
 Plug 'rhysd/vim-grammarous'
 Plug 'junegunn/goyo.vim'
+Plug 'gabrielelana/vim-markdown'
 " Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 " COMPLETION {{{
 Plug 'ervandew/supertab'  " for autocompletion using <TAB>
