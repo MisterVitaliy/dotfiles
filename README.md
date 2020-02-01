@@ -33,7 +33,7 @@ git clone https://github.com/MisterVitaliy/dotfiles
 cd dotfiles
 make dotfiles
 ```
-Sctipt instead of moving all files to the home directory create symlinks.  
+Script instead of moving all files to the home directory create symlinks.  
 **CAUTION: installation of this dotfiles will remove your configs without the ability to restore it!**  
 
 Additionally you need to write `:PlugInstall` inside **vim** to install all shiny plugins  
