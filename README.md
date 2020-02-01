@@ -1,7 +1,7 @@
 # Just another dotfiles repo
 
 These are the dotfiles written or found by me  
-And used on everyday basis  
+And used on an everyday basis  
 
 ![Initial checks](/../screenshots/screenshots/initial.png "Initial checks")  
 
@@ -33,8 +33,8 @@ git clone https://github.com/MisterVitaliy/dotfiles
 cd dotfiles
 make dotfiles
 ```
-Sctipt instead of moving all files to home directory create symlinks.  
-**CAUTION: installation of this dotfiles will remove your configs without ability to restore it!**  
+Sctipt instead of moving all files to the home directory create symlinks.  
+**CAUTION: installation of this dotfiles will remove your configs without the ability to restore it!**  
 
 Additionally you need to write `:PlugInstall` inside **vim** to install all shiny plugins  
 ![Configured vim](/../screenshots/screenshots/vim.png "Configured VIM in action")
