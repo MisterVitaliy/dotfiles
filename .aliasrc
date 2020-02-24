@@ -1,16 +1,4 @@
 #!/bin/bash
-#alias -g G="| grep"
-#alias -g EG="| egrep"
-#alias -g L="| less"
-#alias -g M="| most"
-#alias -g BG="> /dev/null 2>&1 &"
-#alias -g NUL="> /dev/null 2>&1"
-#alias -g N="&>/dev/null"
-#alias -g 1N="1>/dev/null"
-#alias -g 2N="2>/dev/null"
-#alias -g DN="/dev/null"
-
-
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -50,7 +38,6 @@ alias swap="dd if=/dev/zero of=/swapfile bs=1024 count=1024000;mkswap /swapfile;
 alias monon="xset dpms force on"
 alias monoff="xset dpms force off"
 alias get-network-interfaces="ip link show | egrep -o '[0-9]*: .*:' | tr -d ' ' | cut -d: -f2"
-
 
 
 if command -v pacman >/dev/null 2>&1; then
@@ -235,13 +222,31 @@ fi
 
 
 
+# kill all processes using regex patterns
+# very usefull when you wan't to completely smash that BLOAT Chrome browser,
+# or milion instances of your buggy multiprocess app :P
 killallproc(){ pgrep "$1" | xargs kill -9 ;}
-mu() { rm -r /mnt/"${1:?}" ; mkdir /mnt/"$1" && mount /dev/"$1" /mnt/"$1" && cd /mnt/"$1" || echo "Error" ;}
+
+# I like to mount everything in mnt folder so created two funcs:
+# Mount Unit and Unmount Unit
+# && and || are essential at that places
+mu() { rm -r /mnt/"${1:?}" ;
+	   mkdir /mnt/"$1" \
+			&& mount /dev/"$1" /mnt/"$1" \
+			&& cd /mnt/"$1" \
+			|| echo "Error" ;}
 uu() { umount /mnt/"$1" ; rm -rf /mnt/"${1:?}" ;}
-users(){ id "$1" | tr ' ' '\n' | sed 's/(/ (/g'| sed 's/=/ = /g' | sed 's/,/,\n\t /g' ;}
+
+# beautify users list
+users(){ id "$1" \
+			| tr ' ' '\n' \
+			| sed 's/(/ (/g' \
+			| sed 's/=/ = /g' \
+			| sed 's/,/,\n\t /g' ;}
 # http://www.commandlinefu.com/commands/view/954
 
 
+# colorize man output
 man(){
   env LESS_TERMCAP_mb=$'\E[01;31m' \
   LESS_TERMCAP_md=$'\E[01;31m' \
@@ -254,6 +259,8 @@ man(){
 }
 
 
+# extract archive
+# syntax: ex <path to archive> (example: ex test.zip)
 ex ()
 {
   if [ -f "$1" ] ; then
@@ -281,6 +288,9 @@ ex ()
 }
 
 
+# compress file or folder
+# syntax: compr <FILE/FOLDER> <TYPE ex. zip, tar, rar>
+# (example: compr test_folder zip)
 compr()
 {
 	dirPriorToExe=$(pwd)
@@ -346,5 +356,3 @@ compr()
 	echo "Done"
 	echo "###########################################"
 }
-
-

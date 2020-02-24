@@ -78,7 +78,8 @@ endif
 syntax on
 filetype plugin indent on
 scriptencoding utf-8
-"set nowrap textwidth=79 colorcolumn=80
+
+set nowrap textwidth=79 colorcolumn=80
 set autochdir
 set autoindent smartindent
 set autoread

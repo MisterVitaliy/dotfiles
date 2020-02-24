@@ -1,5 +1,5 @@
 .PHONY: all
-all: dotfiles suckless touchpad live ## install dotfiles and suckless tools
+all: dotfiles suckless ## install dotfiles and suckless tools
 
 
 .PHONY: dotfiles
@@ -7,11 +7,15 @@ dotfiles: ## install dotfiles
 	@echo "HOME:  $(HOME)";
 	@echo "PWD    $(PWD)";
 	# === DOTFILES-DIRS ===
-	@for dir in $(shell find $(PWD) -type d | egrep -v "(useful|.git)" | sed s:"$(PWD)/":: | sed 1d); do \
+	@for dir in $(shell find $(PWD) -type d \
+			| egrep -v "(useful|.git)" \
+			| sed s:"$(PWD)/":: | sed 1d); do \
 		mkdir -p $(HOME)/$$dir; \
 	done;
 	# === DOTFILES-FILES ===
-	@for file in $(shell find $(PWD) -type f | egrep -v "(.git|Makefile|setup.sh|README.md|useful|.bashrc)" | sed s:"$(PWD)/"::); do \
+	@for file in $(shell find $(PWD) -type f \
+			| egrep -v "(.git|Makefile|setup.sh|README.md|LICENSE)" \
+			| sed s:"$(PWD)/"::); do \
 		ln -sf $(PWD)/$$file $(HOME)/$$file; \
 	done;
 	cat $(PWD)/.bashrc >> $(HOME)/.bashrc
@@ -79,5 +83,5 @@ live: ## install configs for grml-live
 
 
 .PHONY: help
-help: ## this help file
+help: ## this help window
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

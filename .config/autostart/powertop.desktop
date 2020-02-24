@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Exec=powertop --auto-tune
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name=powertop-tune
-Comment=
-

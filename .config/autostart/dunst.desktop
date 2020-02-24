@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Exec=dunst
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name=dunst
-Comment=
-
