@@ -139,3 +139,4 @@ fi
 [ -f ~/.bash_prompt ]          && source ~/.bash_prompt
 [ -f ~/.aliasrc ]              && source ~/.aliasrc
 [ -f ~/.fzf.bash ]             && source ~/.fzf.bash
+[ -f ~/.config/broot/launcher/bash/br ] && source ~/.config/broot/launcher/bash/br

@@ -68,12 +68,22 @@ doas-install: ## install doas (non-BLOAT alternative to sudo)
 	(cd $(INSTALL_DIR)/doas && sudo make && sudo make install)
 	printf "permit zeroring as root\n" | sudo tee "/usr/local/etc/doas.conf"
 doas-remove:
-	rm -rf $(INSTALL_DIR)/doas
-	@if [ ! -d /usr/local/bin/doas ]; then \
+	@if [ -d $(INSTALL_DIR)/doas ]; then \
+		rm -r $(INSTALL_DIR)/doas; \
+	fi
+	@if [ -f /usr/local/bin/doas ]; then \
 		sudo rm /usr/local/bin/doas; \
 	fi
-	@if [ ! -d /usr/local/etc/doas.conf ]; then \
+	@if [ -f /usr/local/etc/doas.conf ]; then \
 		sudo rm /usr/local/etc/doas.conf; \
+	fi
+
+broot-install:
+	sudo wget https://dystroy.org/broot/download/x86_64-linux/broot -O /usr/local/bin/broot
+	sudo chmod +x /usr/local/bin/broot
+broot-remove:
+	@if [ -f /usr/local/bin/broot ]; then \
+		sudo rm /usr/local/bin/broot; \
 	fi
 
 dwm: ## install dwm tiling manager
