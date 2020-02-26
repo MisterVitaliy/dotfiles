@@ -8,6 +8,7 @@ alias ..2="cd ../.."
 alias ..3="cd ../../.."
 alias ..4="cd ../../../.."
 alias ..5="cd ../../../../.."
+alias sudo='sudo ' # sudo to work with aliases
 alias ls="ls -lhF --color=always"
 alias la="ls -lah --color=always"
 alias ll="ls -lah --color=always"
@@ -64,6 +65,15 @@ elif command -v apt >/dev/null 2>&1; then
 	alias pac-auto2manual="apt-mark showauto | xargs -n 1 apt-mark manual"
 fi
 
+if command -v emacs-nox >/dev/null 2>&1; then
+	alias emacsd='emacs-nox --daemon'
+	alias emad='emacs-nox --daemon'
+	alias emd='emacs-nox --daemon'
+elif command -v emacs >/dev/null 2>&1; then
+	alias emacsd='emacs --daemon'
+	alias emad='emacs --daemon'
+	alias emd='emacs --daemon'
+fi
 
 if command -v emacsclient >/dev/null 2>&1; then
 	alias e='emacsclient'
@@ -72,13 +82,18 @@ if command -v emacsclient >/dev/null 2>&1; then
 	alias ema='emacsclient'
 fi
 
+if command -v rg >/dev/null 2>&1; then
+	alias grep='rg'
+else
+	echo "RIPGREP is not installed"
+fi
 
 if command -v gnugo >/dev/null 2>&1; then
 	alias go9="gnugo --boardsize 9  --color black --komi 0 --chinese-rule"
 	alias go13="gnugo --boardsize 13 --color black --komi 0 --chinese-rule"
 	alias go19="gnugo --boardsize 19 --color black --komi 0 --chinese-rule"
 else
-	echo 'GNUGO not installed'
+	echo 'GNUGO is not installed'
 fi
 
 
@@ -87,7 +102,7 @@ if command -v youtube-dl >/dev/null 2>&1; then
 	alias yt-video="youtube-dl -cit -f best"
 	alias yt-audio="youtube-dl -x --audio-format mp3"
 else
-	echo 'YOUTUBE-DL not installed'
+	echo 'YOUTUBE-DL is not installed'
 fi
 
 
@@ -99,7 +114,7 @@ if command -v trash >/dev/null 2>&1; then
 	alias rm-clear="trash-empty"
 	alias rm-restore="trash-restore"
 else
-	echo 'TRASH-CLI not installed'
+	echo 'TRASH-CLI is not installed'
 fi
 
 
@@ -111,7 +126,7 @@ if command -v tmux >/dev/null 2>&1; then
 	alias tmuxl="tmux list-sessions"
 	alias tmuxa="tmux -2 attach-session -d -t"
 else
-	echo "TMUX not installed..."
+	echo "TMUX is not installed"
 fi
 
 
@@ -126,21 +141,21 @@ if command -v git >/dev/null 2>&1; then
 	alias gpl="git pull"
 	alias gpsh="git push"
 else
-	echo "GIT not installed..."
+	echo "GIT is not installed"
 fi
 
 
 if command -v nano >/dev/null 2>&1; then
 	alias nano="nano -c -$"
 else
-	echo 'NANO not installed'
+	echo 'NANO is not installed'
 fi
 
 
 if command -v wget >/dev/null 2>&1; then
 	alias wget="wget -N -c"
 else
-	echo 'WGET not installed'
+	echo 'WGET is not installed'
 fi
 
 
@@ -148,14 +163,14 @@ if command -v xclip >/dev/null 2>&1; then
 	alias c="xclip -selection clipboard"
 	alias p="xclip -selection clipboard -o"
 else
-	echo 'XCLIP not installed'
+	echo 'XCLIP is not installed'
 fi
 
 
 if command -v nmap >/dev/null 2>&1; then
 	scan-for-port(){ nmap -sS -O -p "$1" "$2" ;}
 else
-	echo 'NMAP not installed'
+	echo 'NMAP is not installed'
 fi
 
 
@@ -163,7 +178,7 @@ if command -v s2ram >/dev/null 2>&1; then
 	alias sus="s2ram -f -a 1"
 	alias hibernate="s2disk"
 else 
-	echo 'S2RAM/S2DISK not installed...'
+	echo 'S2RAM/S2DISK are not installed'
 	alias sus="systemctl suspend"
 	alias hibernate="systemctl hibernate"
 fi
@@ -174,7 +189,7 @@ if command -v curl >/dev/null 2>&1; then
 	alias myhost="curl ifconfig.me/host"
 	alias wttr="curl wttr.in/warszawa" 
 else
-	echo "CURL not installed..."
+	echo "CURL is not installed"
 fi
 
 
@@ -182,7 +197,7 @@ if command -v vboxmanage >/dev/null 2>&1; then
 	alias vbox-list="vboxmanage list vms"
 	alias vbox-start="vboxmanage startvm"
 else
-	echo 'VirtualBox not installed'
+	echo 'VirtualBox is not installed'
 fi
 
 
@@ -225,7 +240,7 @@ if command -v fzf >/dev/null 2>&1; then
 		}
 	fi
 else
-	echo "FZF not installed..."
+	echo "FZF is not installed"
 fi
 
 
