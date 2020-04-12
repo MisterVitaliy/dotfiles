@@ -13,10 +13,11 @@ alias ls="ls -lhF --color=always"
 alias la="ls -lah --color=always"
 alias ll="ls -lah --color=always"
 alias mkdir="mkdir -pv"
-alias cp="cp -Rv"
-alias cpr="cp -pR"
+alias cp="cp -riv"
+alias mv="mv -iv"
+alias rm="rm -driv"
 alias du="du -d1 -h"
-alias dfk="df -PTakh"
+alias dfk="df -PTahk"
 alias dfi="df -PTahi"
 alias free="free -h --total"
 alias cls='echo -ne "\033c"'
@@ -55,7 +56,7 @@ elif command -v apt >/dev/null 2>&1; then
 	echo "Using APT package manager"
 	alias paci="apt install"
 	alias paci-deb="dpkg -i"
-	alias pacr="apt remove"
+	alias pacr="apt purge"
 	alias pacs="apt search"
 	alias pacu="apt update && apt upgrade"
 	alias pacc="apt autoclean && apt autoremove"
@@ -76,17 +77,32 @@ elif command -v emacs >/dev/null 2>&1; then
 fi
 
 if command -v emacsclient >/dev/null 2>&1; then
-	alias e='emacsclient'
-	alias v='emacsclient'
-	alias em='emacsclient'
-	alias ema='emacsclient'
+	alias e=emacsclient
+	alias v=emacsclient
+	alias em=emacsclient
+	alias ema=emacsclient
 fi
 
+
+if command -v vim.tiny >/dev/null 2>&1; then
+	alias vim="vim.tiny"
+fi
+
+if command -v vim-nox >/dev/null 2>&1; then
+	alias vim="vim-nox"
+fi
+
+if command -v vim >/dev/null 2>&1; then
+	alias vim="vim"
+fi
+
+
 if command -v rg >/dev/null 2>&1; then
-	alias grep='rg'
+	alias grep=rg
 else
 	echo "RIPGREP is not installed"
 fi
+
 
 if command -v gnugo >/dev/null 2>&1; then
 	alias go9="gnugo --boardsize 9  --color black --komi 0 --chinese-rule"
@@ -187,7 +203,10 @@ fi
 if command -v curl >/dev/null 2>&1; then
 	alias myip="curl ifconfig.me/ip"
 	alias myhost="curl ifconfig.me/host"
-	alias wttr="curl wttr.in/warszawa" 
+	alias wttr_warsaw="curl wttr.in/warsaw"
+	alias wttr_ternopil="curl wttr.in/ternopil"
+	alias wttr_buchach="curl wttr.in/buchach"
+	alias wttr_london="curl wttr.in/london"
 else
 	echo "CURL is not installed"
 fi
@@ -206,18 +225,15 @@ if command -v fzf >/dev/null 2>&1; then
 		eval "$(history | cut -c 8- | uniq | fzf +s --tac)"
 	}
 
-
 	fuz-cd() {
 		local dir
 		dir=$(find "${1:-.}" -type d 2>/dev/null | fzf --border --preview "ls {}") && cd "$dir" || echo "Error"
 	}
 
-
 	fuz-edit() {
 		local file
 		file=$(find "${1:-.}" -type f 2>/dev/null | fzf --border --preview '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}) 2> /dev/null | head -500' && vim "$file")
 	}
-
 
 	fuz-kill() {
 		local pid
@@ -227,7 +243,6 @@ if command -v fzf >/dev/null 2>&1; then
 		echo "$pid" | xargs kill -"${1:-9}"
 		fi
 	}
-
 
 	if command -v git >/dev/null 2>&1; then
 		gc_commit() {

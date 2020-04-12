@@ -47,10 +47,19 @@ shopt -s shift_verbose
 
 
 export SHELL=/bin/bash
-export TERMINAL=xterm
 export EDITOR=emacsclient
+export TBROWSER=w3m
+export TERMINAL=xterm
 export READER=zathura
-export BROWSER=w3m
+export VIDEOPLAYER=mpv
+export GBROWSER=firefox-esr
+if command -v xiwi >/dev/null 2>&1; then
+    export TERMINAL="xiwi $TERMINAL"
+    export READER="xiwi $READER"
+    export VIDEOPLAYER="xiwi $VIDEOPLAYER"
+    export GBROWSER="xiwi $GBROWSER"
+fi
+
 export HISTFILE=~/.command_line_history
 export SAVEHIST=200000000
 export HISTSIZE=20000000000
@@ -129,14 +138,14 @@ else
 fi
 
 
-[ -d "$HOME/.config/scripts" ] && export PATH="$HOME/.config/scripts:$PATH"
-[ ! -d ~/Documents ]           && mkdir ~/Documents    || echo "Documents already exist"
-[ ! -d ~/Downloads ]           && mkdir ~/Downloads    || echo "Downloads already exist"
-[ ! -d ~/Music ]               && mkdir ~/Music        || echo "Music already exist"
-[ ! -d ~/Pictures ]            && mkdir ~/Pictures     || echo "Pictures already exist"
-[ ! -d ~/Videos ]              && mkdir ~/Videos       || echo "Videos already exist"
-[ ! -d "$WORKON_HOME" ]        && mkdir "$WORKON_HOME" || echo "Python ENV home already exist"
-[ -f ~/.bash_prompt ]          && source ~/.bash_prompt
-[ -f ~/.aliasrc ]              && source ~/.aliasrc
-[ -f ~/.fzf.bash ]             && source ~/.fzf.bash
+[ -d "$SCRIPT_FOLDER" ]                 && export PATH="$PATH:$SCRIPT_FOLDER"
+[ ! -d ~/Documents ]                    && mkdir ~/Documents    || echo "Documents already exist"
+[ ! -d ~/Downloads ]                    && mkdir ~/Downloads    || echo "Downloads already exist"
+[ ! -d ~/Music ]                        && mkdir ~/Music        || echo "Music already exist"
+[ ! -d ~/Pictures ]                     && mkdir ~/Pictures     || echo "Pictures already exist"
+[ ! -d ~/Videos ]                       && mkdir ~/Videos       || echo "Videos already exist"
+[ ! -d "$WORKON_HOME" ]                 && mkdir "$WORKON_HOME" || echo "Python ENV home already exist"
+[ -f ~/.bash_prompt ]                   && source ~/.bash_prompt
+[ -f ~/.aliasrc ]                       && source ~/.aliasrc
+[ -f ~/.fzf.bash ]                      && source ~/.fzf.bash
 [ -f ~/.config/broot/launcher/bash/br ] && source ~/.config/broot/launcher/bash/br
