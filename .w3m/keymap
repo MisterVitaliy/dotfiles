@@ -1,0 +1,244 @@
+
+## Reference ##
+# Sample from https://punkbite.blogspot.ca/2015/05/customizing-shortcuts-of-w3m-web-browser.html
+
+### A sample of ~/.w3m/keymap (default) ###
+#
+#    Ctrl  : C-, ^
+#    Escape: ESC-, M-, ^[
+#    Space : SPC, ' '
+#    Tab   : TAB, ^I
+#    Delete: DEL, ^?
+#    Up    : UP, ^[[A
+#    Down  : DOWN, ^[[B
+#    Right : RIGHT, ^[[C
+#    Left  : LEFT, ^[[D
+
+# End sample
+
+
+## Invalidate previous shortcuts ##
+
+keymap SPC NULL
+keymap + NULL
+keymap ^[[6~ NULL
+keymap C-v NULL
+keymap - NULL
+keymap b NULL
+keymap ^[[5~ NULL
+keymap ESC-v NULL
+keymap RIGHT NULL
+keymap C-f NULL
+keymap LEFT NULL
+keymap C-b NULL
+keymap C-n NULL
+keymap DOWN NULL
+keymap UP NULL
+keymap C-p NULL
+keymap k NULL
+keymap K NULL
+keymap j NULL
+keymap J NULL
+keymap l NULL
+keymap h NULL
+keymap < NULL
+keymap > NULL
+keymap , NULL
+keymap . NULL
+keymap ^ NULL
+keymap C-a NULL
+keymap $ NULL
+keymap C-e NULL
+keymap Z NULL
+keymap z NULL
+keymap ESC-g NULL
+keymap ESC-< NULL
+keymap ^[[1~ NULL
+keymap g NULL
+keymap G NULL
+keymap ESC-> NULL
+keymap ^[[4~ NULL
+keymap w NULL
+keymap [ NULL
+keymap ] NULL
+keymap TAB NULL
+keymap C-u NULL
+keymap ^[[Z NULL
+keymap ESC-TAB NULL
+keymap ESC-m NULL
+keymap ( NULL
+keymap ) NULL
+keymap C-m NULL
+keymap C-j NULL
+keymap ESC-C-m NULL
+keymap W NULL
+keymap ESC-C-j NULL
+keymap a NULL
+keymap I NULL
+keymap ESC-I NULL
+keymap c NULL
+keymap u NULL
+keymap i NULL
+keymap = NULL
+keymap C-g NULL
+keymap : NULL
+keymap ";" NULL
+keymap ESC-: NULL
+keymap F NULL
+keymap M NULL
+keymap ESC-M NULL
+keymap L NULL
+keymap ESC-l NULL
+keymap U NULL
+keymap ESC-u NULL
+keymap V NULL
+keymap @ NULL
+keymap # NULL
+keymap | NULL
+keymap B NULL
+keymap s NULL
+keymap v NULL
+keymap ESC-s NULL
+keymap S NULL
+keymap E NULL
+keymap ESC-e NULL
+keymap R NULL
+keymap C-l NULL
+keymap T NULL
+keymap C-q NULL
+keymap } NULL
+keymap { NULL
+keymap ESC-t NULL
+keymap ESC-b NULL
+keymap ESC-a NULL
+keymap / NULL
+keymap ? NULL
+keymap n NULL
+keymap N NULL
+keymap C-s NULL
+keymap C-r NULL
+keymap ESC-w NULL
+keymap ESC-W NULL
+keymap C-@ NULL
+keymap ESC-n NULL
+keymap ESC-p NULL
+keymap \" NULL
+keymap ^[[28~ NULL
+keymap ^[[L NULL
+keymap ^[[E NULL
+keymap ^[[2~ NULL
+keymap H NULL
+keymap o NULL
+keymap r NULL
+keymap C-k NULL
+keymap C-h NULL
+keymap D NULL
+keymap m NULL
+keymap C-w NULL
+keymap ESC-c NULL
+keymap ESC-o NULL
+keymap ESC-k NULL
+keymap ! NULL
+keymap C-z NULL
+keymap q NULL
+keymap Q NULL
+
+
+## Custom additions ##
+# Start defining your shortcuts here!
+
+
+
+## qutebrowser(ish) - controls ##
+
+# basic vim controls #
+keymap  l    MOVE_RIGHT1
+keymap  h    MOVE_LEFT1
+keymap  j    MOVE_DOWN1
+keymap  k    MOVE_UP1
+keymap  gg   BEGIN
+keymap  G    END
+keymap  0    LINE_BEGIN
+keymap  $    LINE_END
+keymap  w    NEXT_WORD
+keymap  b    PREV_WORD
+keymap  C-d  NEXT_PAGE
+keymap  C-u  PREV_PAGE
+keymap  zz   CENTER_V
+keymap  u    UNDO
+keymap  C-r  REDO
+keymap  /    ISEARCH
+keymap  ?    ISEARCH_BACK
+keymap  n    SEARCH_NEXT
+keymap  N    SEARCH_PREV
+
+# tab movement #
+keymap  J    PREV_TAB
+keymap  K    NEXT_TAB
+keymap  H    BACK
+keymap  L    NEXT
+keymap  t    NEW_TAB
+keymap  T    TAB_MENU
+keymap  x    CLOSE_TAB
+
+# links controls #
+# TAB - next link
+# SHIFT-TAB - prev link
+# SPACE - open link
+keymap  TAB NEXT_LINK
+keymap  ESC-[Z PREV_LINK
+keymap  SPC GOTO_LINK
+
+# go to url #
+keymap o GOTO
+keymap O TAB_GOTO
+keymap r RELOAD
+
+# external #
+keymap e EXTERN_LINK
+keymap E EXTERN
+
+# Quit w3m (QUIT)
+keymap q QUIT
+keymap Q ABORT
+keymap ESC INTERRUPT
+
+# info controls
+keymap y PEEK
+keymap y PEEK_LINK
+keymap f MOVE_LIST_MENU
+keymap F LIST_MENU
+keymap i INFO
+keymap I LINE_INFO
+keymap v VIEW
+keymap p SELECT_MENU
+keymap ESC-C-j SUBMIT
+
+# Home page settings
+keymap gg GOTO     https://www.google.com/en
+keymap gG TAB_GOTO https://www.google.com/en
+keymap gd GOTO     https://www.duckduckgo.com
+keymap gD TAB_GOTO https://www.duckduckgo.com
+
+# commands #
+keymap :: COMMAND
+keymap :h HELP
+keymap :o OPTIONS
+keymap :w SAVE
+keymap :W PRINT
+keymap :d DOWNLOAD_LIST
+keymap :h HISTORY
+keymap :a ADD_BOOKMARK
+keymap :b VIEW_BOOKMARK
+keymap :q QUIT
+keymap :e EXIT
+keymap :i INTERRUPT
+
+# Save link to file (SAVE_LINK)
+# keymap W SAVE_LINK
+
+# View image (VIEW_IMAGE)
+# keymap i VIEW_IMAGE
+
+# Save image to file (SAVE_IMAGE)
+# keymap I SAVE_IMAGE

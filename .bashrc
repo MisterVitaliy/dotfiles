@@ -52,11 +52,13 @@ export TBROWSER=w3m
 export TERMINAL=xterm
 export READER=zathura
 export VIDEOPLAYER=mpv
+export IMAGEVIEWER=feh
 export GBROWSER=firefox-esr
 if command -v xiwi >/dev/null 2>&1; then
     export TERMINAL="xiwi $TERMINAL"
     export READER="xiwi $READER"
     export VIDEOPLAYER="xiwi $VIDEOPLAYER"
+    export IMAGEVIEWER="xiwi $IMAGEVIEWER"
     export GBROWSER="xiwi $GBROWSER"
 fi
 
