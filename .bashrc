@@ -71,6 +71,7 @@ export WLAN_INTERFACE=wlan0
 export LESS='-R -g -w'
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export WORKON_HOME=$HOME/.py_workspace
+export PROJECT_HOME=$HOME/projects
 export SCRIPT_FOLDER="$HOME/.config/scripts"
 #export DISTRO=$(cat /etc/os-release | grep ID | head -n 1 | cut -d= -f2)
 #export DISTRO=${DISTRO:-debian}
@@ -147,7 +148,10 @@ fi
 [ ! -d ~/Pictures ]                     && mkdir ~/Pictures     || echo "Pictures already exist"
 [ ! -d ~/Videos ]                       && mkdir ~/Videos       || echo "Videos already exist"
 [ ! -d "$WORKON_HOME" ]                 && mkdir "$WORKON_HOME" || echo "Python ENV home already exist"
+[ ! -d "$PROJECT_HOME" ]                 && mkdir "$PROJECT_HOME" || echo "projecthome already exist"
+
 [ -f ~/.bash_prompt ]                   && source ~/.bash_prompt
 [ -f ~/.aliasrc ]                       && source ~/.aliasrc
 [ -f ~/.fzf.bash ]                      && source ~/.fzf.bash
 [ -f ~/.config/broot/launcher/bash/br ] && source ~/.config/broot/launcher/bash/br
+[ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh 

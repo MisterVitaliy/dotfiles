@@ -41,6 +41,21 @@ alias monon="xset dpms force on"
 alias monoff="xset dpms force off"
 alias get-network-interfaces="ip link show | egrep -o '[0-9]*: .*:' | tr -d ' ' | cut -d: -f2"
 
+s-google() {
+	$BROWSER $(echo "https://www.google.com/search?q=$@" | sed "s/ /+/g")
+}
+s-duck() {
+	$BROWSER $(echo "https://www.duckduckgo.com/?q=$@" | sed "s/ /+/g")
+}
+s-github() {
+	$BROWSER $(echo "https://www.github.com/search?q=$@" | sed "s/ /+/g")
+}
+s-stack() {
+	$BROWSER $(echo "https://www.stackoverflow.com/search?q=$@" | sed "s/ /+/g")
+}
+s-reddit() {
+	$BROWSER $(echo "https://www.reddit.com/search?q=$@" | sed "s/ /+/g")
+}
 
 if command -v pacman >/dev/null 2>&1; then
 	echo "Using PACMAN package manager"
@@ -120,7 +135,6 @@ if command -v youtube-dl >/dev/null 2>&1; then
 else
 	echo 'YOUTUBE-DL is not installed'
 fi
-
 
 if command -v trash >/dev/null 2>&1; then
 	alias rm="trash-put"

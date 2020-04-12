@@ -3,7 +3,7 @@
 INSTALL_DIR=$(HOME)/Documents
 
 ESSINTIAL=bash bash-completion curl build-essential ca-certificates fdisk git grep less make mawk wget sed shellcheck
-GEEKY=fd-find aspell aspell-en aspell-ru aspell-uk aspell-pl openssh-client ranger w3m scrot ripgrep htop emacs-nox exuberant-ctags fzf i3
+GEEKY=fd-find aspell aspell-en aspell-ru aspell-uk aspell-pl openssh-client ranger w3m scrot ripgrep htop emacs-nox exuberant-ctags fzf i3 task-spooler sox
 NPM=npm
 PYTHON=flycheck-doc pylint python-pip python3 python3-dev python3-pip python3-tk
 FLEX=bison flex-old
