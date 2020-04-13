@@ -69,6 +69,7 @@ export LESS='-R -g -w'
 export LESSHISTFILE="-"
 export ALSA_CONFIG_PATH="$HOME/.config/alsa/asoundrc"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export WGETRC="$HOME/.config/wget/wgetrc"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export MACHINE_STORAGE_PATH="$XDG_DATA_HOME"/docker-machine
