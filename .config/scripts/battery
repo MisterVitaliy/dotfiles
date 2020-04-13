@@ -1,43 +1,18 @@
-#!/bin/sh
+#!/bin/bash
+result=""
 
-out=''
-percentage=''
-line=''
-
-if [ -d "/sys/class/power_supply/BAT0" ]; then
-	if [ -f "/sys/class/power_supply/battery/capacity" ]; then
-		percentage=$(cat /sys/class/power_supply/BAT0/capacity)
-	elif [ -f "/sys/class/power_supply/BAT0/charge_now" ]; then
-		percentage=$(cat /sys/class/power_supply/BAT0/charge_full /sys/class/power_supply/BAT0/charge_now | tr "\\n" " " | awk '{printf "%.2f", $2/$1*100}')
-	elif [ -f "/sys/class/power_supply/BAT0/energy_now" ]; then
-		percentage=$(cat /sys/class/power_supply/BAT0/energy_full /sys/class/power_supply/BAT0/energy_now | tr "\\n" " " | awk '{printf "%.2f", $2/$1*100}')
+for batt in /sys/class/power_supply/BAT*
+do
+    name=$(echo "$batt" | rev | cut -d/ -f1 | rev)
+	if [ -f "$batt/capacity" ]; then
+		percentage=$(cat "$batt/capacity")
+	elif [ -f "$batt/charge_now" ]; then
+		percentage=$(cat "$batt/charge_full" "$batt/charge_now" | tr "\\n" " " | awk '{printf "%.2f", $2/$1*100}')
+	elif [ -f "$batt/energy_now" ]; then
+		percentage=$(cat "$batt/energy_full" "$batt/energy_now" | tr "\\n" " " | awk '{printf "%.2f", $2/$1*100}')
 	fi
-elif [ -d "/sys/class/power_supply/battery" ]; then
-	if [ -f "/sys/class/power_supply/battery/capacity" ]; then
-		percentage=$(cat /sys/class/power_supply/battery/capacity)
-	elif [ -f "/sys/class/power_supply/battery/charge_now" ]; then
-		percentage=$(cat /sys/class/power_supply/battery/charge_full /sys/class/power_supply/battery/charge_now | tr "\\n" " " | awk '{printf "%.2f", $2/$1*100}')
-	elif [ -f "/sys/class/power_supply/battery/energy_now" ]; then
-		percentage=$(cat /sys/class/power_supply/battery/energy_full /sys/class/power_supply/battery/energy_now | tr "\\n" " " | awk '{printf "%.2f", $2/$1*100}')
-	fi
-fi
+    [ $(cat "$batt/subsystem/AC/online") -eq 1 ] && line='+' || line=""
+    result="$result $name $line$percentage%"
+done
 
-
-if [ -d "/sys/class/power_supply/AC0" ]; then
-	line=$(cat /sys/class/power_supply/AC0/online)
-elif [ -d "/sys/class/power_supply/AC" ]; then
-	line=$(cat /sys/class/power_supply/AC/online)
-elif [ -d "/sys/class/power_supply/ac" ]; then
-	line=$(cat /sys/class/power_supply/ac/online)
-fi
-
-
-[ "$line" -eq 1 ] && out='+'
-out="$out$percentage%"
-
-
-if [ -d "/sys/class/thermal/thermal_zone0" ]; then
-	t_bat=$(awk '{ printf "%.1f", $1/1000 }' /sys/class/thermal/thermal_zone0/temp)
-fi
-
-echo "$out($t_bat°C)"
+echo $result

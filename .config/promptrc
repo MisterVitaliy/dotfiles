@@ -131,6 +131,10 @@ prompt_ps(){
 		PS1+="\\[${white}\\]$($SCRIPT_FOLDER/uptime)   "
 	fi
 	PS1+="\\n" # newline
+	if [ -f "$SCRIPT_FOLDER/thermal" ];then
+		PS1+="\\[${violet}\\]$($SCRIPT_FOLDER/thermal)   "
+	fi
+	PS1+="\\n" # newline
 
 	ifnewline=0
 
