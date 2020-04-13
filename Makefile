@@ -5,7 +5,7 @@ INSTALL_DIR=$(HOME)/Documents
 ESSINTIAL=bash bash-completion curl build-essential ca-certificates fdisk git grep less make mawk wget sed shellcheck
 GEEKY=fd-find aspell aspell-en aspell-ru aspell-uk aspell-pl openssh-client ranger w3m scrot ripgrep htop emacs-nox exuberant-ctags fzf i3 task-spooler sox
 NPM=npm
-PYTHON=flycheck-doc pylint python-pip python3 python3-dev python3-pip python3-tk
+PYTHON=flycheck-doc pylint python-pip python3 python3-dev python3-pip python3-tk virtualenvwrapper
 FLEX=bison flex-old
 GAMES=cataclysm-dda-curses crawl nethack-console nethack-spoilers slashem dwarf-fortress
 GAMESX=crawl-tiles cataclysm-dda-sdl nethack-x11 nethack-lisp slashem-sdl
@@ -137,9 +137,3 @@ help: ## this help window
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
 		| sort \
 		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
-
-
-#check: PYTHON-exists
-#PYTHON-exists: ; @which python > /dev/null
-#mytarget: check
-#.PHONY: check PYTHON-exists

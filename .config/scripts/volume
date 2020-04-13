@@ -6,13 +6,20 @@ elif [ "$1" = "dec" ]; then
 elif [ "$1" = "toggle" ]; then
 	amixer set Master toggle > /dev/null 2>&1; notify-send ":VOLUME:" "$($0)"
 else
-	mute=$(amixer get Master | grep -Eo "\[(on|off)\]")
-	volumes=$(amixer get Master | grep -Eo "[0-9]{1,3}%")
-	if [ "$mute" = "[on]" ]; then
-		mute="+"
+	amixer get Master >/dev/null 2>&1
+	RESULT=$?
+	if [ $RESULT -eq 0 ]; then
+		mute=$(amixer get Master | grep -Eo "\[(on|off)\]")
+		volumes=$(amixer get Master | grep -Eo "[0-9]{1,3}%")
+		if [ "$mute" = "[on]" ]; then
+			mute="+"
+		else
+			mute="\-\-"
+		fi
+		echo "$mute $volumes"
+		exit 0
 	else
-		mute="\-\-"
+		echo "no display"
+		exit 0
 	fi
-	echo "$mute $volumes"
-	exit 0
 fi

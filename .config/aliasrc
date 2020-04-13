@@ -1,4 +1,14 @@
 #!/bin/bash
+#
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias dir='dir —color=auto'
+    alias vdir='vdir —color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -42,19 +52,47 @@ alias monoff="xset dpms force off"
 alias get-network-interfaces="ip link show | egrep -o '[0-9]*: .*:' | tr -d ' ' | cut -d: -f2"
 
 s-google() {
-	$BROWSER $(echo "https://www.google.com/search?q=$@" | sed "s/ /+/g")
+	$TBROWSER $(echo "https://www.google.com/search?q=$@" | sed "s/ /+/g")
 }
 s-duck() {
-	$BROWSER $(echo "https://www.duckduckgo.com/?q=$@" | sed "s/ /+/g")
+	$TBROWSER $(echo "https://www.duckduckgo.com/?q=$@" | sed "s/ /+/g")
 }
 s-github() {
-	$BROWSER $(echo "https://www.github.com/search?q=$@" | sed "s/ /+/g")
+	$TBROWSER $(echo "https://www.github.com/search?q=$@" | sed "s/ /+/g")
 }
 s-stack() {
-	$BROWSER $(echo "https://www.stackoverflow.com/search?q=$@" | sed "s/ /+/g")
+	$TBROWSER $(echo "https://www.stackoverflow.com/search?q=$@" | sed "s/ /+/g")
 }
 s-reddit() {
-	$BROWSER $(echo "https://www.reddit.com/search?q=$@" | sed "s/ /+/g")
+	$TBROWSER $(echo "https://www.reddit.com/search?q=$@" | sed "s/ /+/g")
+}
+
+s-wiki() {
+	$TBROWSER $(echo "https://www.duckduckgo.com/?q=\!w $@" | sed "s/ /+/g")
+}
+
+s-news() {
+	$TBROWSER $(echo "https://www.duckduckgo.com/?q=\!n $@" | sed "s/ /+/g")
+}
+
+s-yt() {
+	$TBROWSER $(echo "https://www.duckduckgo.com/?q=\!yt $@" | sed "s/ /+/g")
+}
+
+s-youtube() {
+	$TBROWSER $(echo "https://www.duckduckgo.com/?q=\!yt $@" | sed "s/ /+/g")
+}
+
+s-map() {
+	$TBROWSER $(echo "https://www.duckduckgo.com/?q=\!m $@" | sed "s/ /+/g")
+}
+
+s-image() {
+	$TBROWSER $(echo "https://www.duckduckgo.com/?q=\!i $@" | sed "s/ /+/g")
+}
+
+s-ducky() {
+	$TBROWSER $(echo "https://www.duckduckgo.com/?q=\! $@" | sed "s/ /+/g")
 }
 
 if command -v pacman >/dev/null 2>&1; then
@@ -149,12 +187,13 @@ fi
 
 
 if command -v tmux >/dev/null 2>&1; then
-	alias tt="tmux attach-session || tmux"
-	alias tmuxi="tmux attach-session || tmux"
-	alias tmuxk="tmux kill-session -t"
-	alias tmuxn="tmux new-session -s"
-	alias tmuxl="tmux list-sessions"
-	alias tmuxa="tmux -2 attach-session -d -t"
+	TMUX_CMD="tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
+	alias tt="$TMUX_CMD attach-session || $TMUX_CMD"
+	alias tmuxi="$TMUX_CMD attach-session || $TMUX_CMD"
+	alias tmuxk="$TMUX_CMD kill-session -t"
+	alias tmuxn="$TMUX_CMD new-session -s"
+	alias tmuxl="$TMUX_CMD list-sessions"
+	alias tmuxa="$TMUX_CMD -2 attach-session -d -t"
 else
 	echo "TMUX is not installed"
 fi

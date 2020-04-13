@@ -1,5 +1,5 @@
-rofi.modi:                          drun,window,run,combi,custom:/home/zeroring/.config/i3/custom.sh
-rofi.combi-modi:                    custom:/home/zeroring/.config/i3/custom.sh,drun,window,run
+rofi.modi:                          drun,window,run,combi
+rofi.combi-modi:                    drun,window,run
 rofi.display-combi:                 custom:
 rofi.opacity:                       85
 rofi.width:                         100
@@ -21,7 +21,7 @@ rofi.padding:                       300
 rofi.yoffset:                       0
 rofi.xoffset:                       0
 rofi.fixed-num-lines:               false
-rofi.terminal:                      guake
+rofi.terminal:                      xterm
 rofi.ssh-client:                    ssh
 rofi.ssh-command:                   {terminal} -e {ssh-client} {host}
 rofi.run-command:                   {cmd}
@@ -61,103 +61,26 @@ URxvt.keysym.C-S-Up:   font-size:incglobal
 URxvt.keysym.C-S-Down: font-size:decglobal
 URxvt.keysym.C-equal:  font-size:reset
 URxvt.keysym.C-slash:  font-size:show
- 
+
 !disable the fucking bell
 URxvt.insecure:                         false
 
-#define S_base03        #002b36
-#define S_base02        #073642
-#define S_base01        #586e75
-#define S_base00        #657b83
-#define S_base0         #839496
-#define S_base1         #93a1a1
-#define S_base2         #eee8d5
-#define S_base3         #fdf6e3
-
-*background:            S_base03
-*foreground:            S_base0
-*fadeColor:             S_base03
-*cursorColor:           S_base1
-*pointerColorBackground:S_base01
-*pointerColorForeground:S_base1
-
-#define S_yellow        #b58900
-#define S_orange        #cb4b16
-#define S_red           #dc322f
-#define S_magenta       #d33682
-#define S_violet        #6c71c4
-#define S_blue          #268bd2
-#define S_cyan          #2aa198
-#define S_green         #859900
-
-!! black dark/light
-*color0:                S_base02
-*color8:                S_base03
-
-!! red dark/light
-*color1:                S_red
-*color9:                S_orange
-
-!! green dark/light
-*color2:                S_green
-*color10:               S_base01
-
-!! yellow dark/light
-*color3:                S_yellow
-*color11:               S_base00
-
-!! blue dark/light
-*color4:                S_blue
-*color12:               S_base0
-
-!! magenta dark/light
-*color5:                S_magenta
-*color13:               S_violet
-
-!! cyan dark/light
-*color6:                S_cyan
-*color14:               S_base1
-
-!! white dark/light
-*color7:                S_base2
-*color15:               S_base3
-
-
-
-
-
-
-
-*.foreground: #f9f7dd 
-*.background: #2f2f2f 
-*.cursorColor: #f9f7dd 
-*.color0: #383838 
-*.color8: #554c48 
-*.color1: #cf6e20 
-*.color9: #dd9a64 
-*.color2: #889083 
-*.color10: #bac5b3 
-*.color3: #8a7a63 
-*.color11: #a99579 
-*.color4: #5f6167 
-*.color12: #90949c 
-*.color5: #796187 
-*.color13: #95869c 
-*.color6: #828f8a 
-*.color14: #b3c4be 
-*.color7: #e5e3cb 
-*.color15: #f9f7dd 
-
-
 
 !! Transparency (0-1):
-! st.alpha: 0.92
+*.alpha: 0.8
 
 !! Set a default font and font size as below:
-! st.font: Monospace-11;
+*.font: monospace:size=10
 
-! st.termname: st-256color
-! st.borderpx: 2
+/* name  dark light */
+/* black    0     8 */
+/* red      1     9 */
+/* green    2    10 */
+/* yellow   3    11 */
+/* blue     4    12 */
+/* purple   5    13 */
+/* cyan     6    14 */
+/* white    7    15 */
 
 /* !! gruvbox: */
 /* *.color0: #1d2021 */
@@ -176,6 +99,8 @@ URxvt.insecure:                         false
 /* *.color13: #d3869b */
 /* *.color14: #8ec07c */
 /* *.color15: #ebdbb2 */
+/* *.color256: #1d2021 */
+/* *.color257: #ebdbb2 */
 
 /* !! gruvbox light: */
 /* *.color0: #fbf1c7 */
@@ -194,6 +119,9 @@ URxvt.insecure:                         false
 /* *.color13: #8f3f71 */
 /* *.color14: #427b58 */
 /* *.color15: #3c3836 */
+/* *.background: #fbf1c7 */
+/* *.foreground: #282828 */
+/* st.alpha: 0.9 */
 
 /* !! brogrammer: */
 /* *.foreground:  #d6dbe5 */
@@ -269,6 +197,28 @@ URxvt.insecure:                         false
 /* *.color13:  #ff00ff */
 /* *.color14:  #00ffff */
 /* *.color15:  #aabac8 */
+/* *.background:   #000000 */
 
+/* ! Dracula Xresources palette */
+/* *.foreground: #F8F8F2 */
+/* *.background: #282A36 */
+/* *.color0:     #000000 */
+/* *.color8:     #4D4D4D */
+/* *.color1:     #FF5555 */
+/* *.color9:     #FF6E67 */
+/* *.color2:     #50FA7B */
+/* *.color10:    #5AF78E */
+/* *.color3:     #F1FA8C */
+/* *.color11:    #F4F99D */
+/* *.color4:     #BD93F9 */
+/* *.color12:    #CAA9FA */
+/* *.color5:     #FF79C6 */
+/* *.color13:    #FF92D0 */
+/* *.color6:     #8BE9FD */
+/* *.color14:    #9AEDFE */
+/* *.color7:     #BFBFBF */
+/* *.color15:    #E6E6E6 */
 
-
+/* *.background: .color0 */
+/* *.color256: 0#1d2021 */
+/* *.color257: 15#ebdbb2 */

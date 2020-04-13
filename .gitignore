@@ -1,8 +1,0 @@
-# Whitelist of files and folders to be uploaded to github
-# ! = allow
-# ** = recursively allow everything in folder and subfolder
-# * = everything in current dir
-# *.ext = wildcard with extension
-
-
-secure

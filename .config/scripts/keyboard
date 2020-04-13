@@ -1,0 +1,3 @@
+#!/bin/sh
+! [ -z "$DISPLAY" ] && xkb=$(setxkbmap -query | grep layout | awk '{ print $2 }') || xkb="no display"
+echo "$xkb"

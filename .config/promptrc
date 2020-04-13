@@ -1,5 +1,4 @@
 #!/bin/bash
-SCRIPTS="$HOME/.config/scripts"
 if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
 	export TERM='gnome-256color';
 elif infocmp xterm-256color >/dev/null 2>&1; then
@@ -119,25 +118,25 @@ prompt_ps(){
 		debian_chroot=$(cat /etc/debian_chroot)
 		PS1+="\\[${green}\\]${debian_chroot:+($debian_chroot)}   "
 	fi
-	if [ -f "$SCRIPTS/battery.sh" ];then
-		PS1+="\\[${yellow}\\]$($SCRIPTS/battery.sh)   "
+	if [ -f "$SCRIPT_FOLDER/battery" ];then
+		PS1+="\\[${yellow}\\]$($SCRIPT_FOLDER/battery)   "
 	fi
-	if [ -f "$SCRIPTS/ram.sh" ];then
-		PS1+="\\[${green}\\]RAM $($SCRIPTS/ram.sh)   "
+	if [ -f "$SCRIPT_FOLDER/ram" ];then
+		PS1+="\\[${green}\\]RAM $($SCRIPT_FOLDER/ram)   "
 	fi
 	if command -v iw >/dev/null 2>&1; then
-		PS1+="\\[${violet}\\]$($SCRIPTS/wlan.sh --info)   "
+		PS1+="\\[${violet}\\]$($SCRIPT_FOLDER/wlan --info)   "
 	fi
-	if [ -f "$SCRIPTS/uptime.sh" ];then
-		PS1+="\\[${white}\\]$($SCRIPTS/uptime.sh)   "
+	if [ -f "$SCRIPT_FOLDER/uptime" ];then
+		PS1+="\\[${white}\\]$($SCRIPT_FOLDER/uptime)   "
 	fi
 	PS1+="\\n" # newline
 
 	ifnewline=0
 
 	if command -v mount >/dev/null 2>&1; then
-		if [ -f "$SCRIPTS/mounts.sh" ];then
-			PS1+="\\[${purple}\\]mounted: $($SCRIPTS/mounts.sh)   "
+		if [ -f "$SCRIPT_FOLDER/mounts" ];then
+			PS1+="\\[${purple}\\]mounted: $($SCRIPT_FOLDER/mounts)   "
 			ifnewline=1
 		fi
 	fi
@@ -146,20 +145,20 @@ prompt_ps(){
 		ifnewline=1
 	fi
 	if command -v amixer >/dev/null 2>&1; then
-		if [ -f "$SCRIPTS/volume.sh" ];then
-			PS1+="\\[${white}\\]vol: $($SCRIPTS/volume.sh)   "
+		if [ -f "$SCRIPT_FOLDER/volume" ];then
+			PS1+="\\[${white}\\]vol: $($SCRIPT_FOLDER/volume)   "
 			ifnewline=1
 		fi
 	fi
 	if command -v xrandr >/dev/null 2>&1; then
-		if [ -f "$SCRIPTS/bright.sh" ];then
-			PS1+="\\[${yellow}\\]bright: $($SCRIPTS/bright.sh)   "
+		if [ -f "$SCRIPT_FOLDER/bright" ];then
+			PS1+="\\[${yellow}\\]bright: $($SCRIPT_FOLDER/bright)   "
 			ifnewline=1
 		fi
 	fi
 	if command -v setxkbmap >/dev/null 2>&1; then
-		if [ -f "$SCRIPTS/keyboard.sh" ];then
-			PS1+="\\[${cyan}\\]xkb: $($SCRIPTS/keyboard.sh)   "
+		if [ -f "$SCRIPT_FOLDER/keyboard" ];then
+			PS1+="\\[${cyan}\\]xkb: $($SCRIPT_FOLDER/keyboard)   "
 			ifnewline=1
 		fi
 	fi

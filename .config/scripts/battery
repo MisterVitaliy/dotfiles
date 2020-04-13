@@ -5,15 +5,21 @@ percentage=''
 line=''
 
 if [ -d "/sys/class/power_supply/BAT0" ]; then
-	percentage=$(cat /sys/class/power_supply/BAT0/energy_full /sys/class/power_supply/BAT0/energy_now | tr "\\n" " " | awk '{printf "%.2f", $2/$1*100}')
+	if [ -f "/sys/class/power_supply/battery/capacity" ]; then
+		percentage=$(cat /sys/class/power_supply/BAT0/capacity)
+	elif [ -f "/sys/class/power_supply/BAT0/charge_now" ]; then
+		percentage=$(cat /sys/class/power_supply/BAT0/charge_full /sys/class/power_supply/BAT0/charge_now | tr "\\n" " " | awk '{printf "%.2f", $2/$1*100}')
+	elif [ -f "/sys/class/power_supply/BAT0/energy_now" ]; then
+		percentage=$(cat /sys/class/power_supply/BAT0/energy_full /sys/class/power_supply/BAT0/energy_now | tr "\\n" " " | awk '{printf "%.2f", $2/$1*100}')
+	fi
 elif [ -d "/sys/class/power_supply/battery" ]; then
 	if [ -f "/sys/class/power_supply/battery/capacity" ]; then
 		percentage=$(cat /sys/class/power_supply/battery/capacity)
-	else
+	elif [ -f "/sys/class/power_supply/battery/charge_now" ]; then
+		percentage=$(cat /sys/class/power_supply/battery/charge_full /sys/class/power_supply/battery/charge_now | tr "\\n" " " | awk '{printf "%.2f", $2/$1*100}')
+	elif [ -f "/sys/class/power_supply/battery/energy_now" ]; then
 		percentage=$(cat /sys/class/power_supply/battery/energy_full /sys/class/power_supply/battery/energy_now | tr "\\n" " " | awk '{printf "%.2f", $2/$1*100}')
 	fi
-elif [ -d "/sys/class/power_supply/BAT" ]; then
-	percentage=$(cat /sys/class/power_supply/BAT/energy_full /sys/class/power_supply/BAT/energy_now | tr "\\n" " " | awk '{printf "%.2f", $2/$1*100}')
 fi
 
 

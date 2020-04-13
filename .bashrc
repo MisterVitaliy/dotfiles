@@ -1,16 +1,4 @@
 #!/bin/bash
-
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
-
-if command -v tmux >/dev/null 2>&1; then
-	[ -z "$TMUX" ] && { tmux attach-session -t default || tmux new-session -s default; }
-fi
-
-
 bind 'set completion-ignore-case on'
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
@@ -62,33 +50,39 @@ if command -v xiwi >/dev/null 2>&1; then
     export GBROWSER="xiwi $GBROWSER"
 fi
 
-export HISTFILE=~/.command_line_history
+export HISTFILE=$HOME/.config/cl_history
 export SAVEHIST=200000000
 export HISTSIZE=20000000000
 export HISTCONTROL=ignoreboth:erasedups
 export HISTIGNORE="df*:free*:&:ls:[bf]g:history:exit"
+
 export WLAN_INTERFACE=wlan0
-export LESS='-R -g -w'
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export WORKON_HOME=$HOME/.py_workspace
 export PROJECT_HOME=$HOME/projects
 export SCRIPT_FOLDER="$HOME/.config/scripts"
+
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export LESS='-R -g -w'
+export LESSHISTFILE="-"
+export ALSA_CONFIG_PATH="$HOME/.config/alsa/asoundrc"
+export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+export WGETRC="$HOME/.config/wget/wgetrc"
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export MACHINE_STORAGE_PATH="$XDG_DATA_HOME"/docker-machine
+export CRAWL_DIR="$XDG_DATA_HOME"/crawl/
+export BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME"/bash-completion/bash_completion
+export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+export QT_QPA_PLATFORMTHEME="gtk2"  # Have QT use gtk2 theme.
+export MOZ_USE_XINPUT2="1"  # Mozilla smooth scrolling/touchpads.
 #export DISTRO=$(cat /etc/os-release | grep ID | head -n 1 | cut -d= -f2)
 #export DISTRO=${DISTRO:-debian}
-export TZ="Europe/Warsaw"
-export LANG="en_UK.UTF-8"
-export LANGUAGE="en_UK.UTF-8"
-export LC_ALL="en_UK.UTF-8"
-
-
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias dir='dir —color=auto'
-    alias vdir='vdir —color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
+#export TZ="Europe/Warsaw"
+#export LANG="en_UK.UTF-8"
+#export LANGUAGE="en_UK.UTF-8"
+#export LC_ALL="en_UK.UTF-8"
 
 
 if ! shopt -oq posix; then
@@ -106,12 +100,9 @@ if [ -d /etc/bash_completion.d/ ]; then
 	done
 fi
 
-
 git config --global user.email "ohol.vitaliy@gmail.com"
 git config --global user.name "Vitalii-Ohol"
 git config --global github.user "Vitalii-Ohol"
-
-
 
 clear
 
@@ -142,16 +133,16 @@ fi
 
 
 [ -d "$SCRIPT_FOLDER" ]                 && export PATH="$PATH:$SCRIPT_FOLDER"
-[ ! -d ~/Documents ]                    && mkdir ~/Documents    || echo "Documents already exist"
-[ ! -d ~/Downloads ]                    && mkdir ~/Downloads    || echo "Downloads already exist"
-[ ! -d ~/Music ]                        && mkdir ~/Music        || echo "Music already exist"
-[ ! -d ~/Pictures ]                     && mkdir ~/Pictures     || echo "Pictures already exist"
-[ ! -d ~/Videos ]                       && mkdir ~/Videos       || echo "Videos already exist"
-[ ! -d "$WORKON_HOME" ]                 && mkdir "$WORKON_HOME" || echo "Python ENV home already exist"
-[ ! -d "$PROJECT_HOME" ]                 && mkdir "$PROJECT_HOME" || echo "projecthome already exist"
+[ ! -d ~/Documents ]                    && mkdir ~/Documents     || echo "Documents already exist"
+[ ! -d ~/Downloads ]                    && mkdir ~/Downloads     || echo "Downloads already exist"
+[ ! -d ~/Music ]                        && mkdir ~/Music         || echo "Music already exist"
+[ ! -d ~/Pictures ]                     && mkdir ~/Pictures      || echo "Pictures already exist"
+[ ! -d ~/Videos ]                       && mkdir ~/Videos        || echo "Videos already exist"
+[ ! -d "$WORKON_HOME" ]                 && mkdir "$WORKON_HOME"  || echo "Python ENV home already exist"
+[ ! -d "$PROJECT_HOME" ]                && mkdir "$PROJECT_HOME" || echo "projecthome already exist"
 
-[ -f ~/.bash_prompt ]                   && source ~/.bash_prompt
-[ -f ~/.aliasrc ]                       && source ~/.aliasrc
-[ -f ~/.fzf.bash ]                      && source ~/.fzf.bash
-[ -f ~/.config/broot/launcher/bash/br ] && source ~/.config/broot/launcher/bash/br
-[ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh 
+[ -f $HOME/.config/promptrc ]                  && source $HOME/.config/promptrc
+[ -f $HOME/.config/aliasrc ]                   && source $HOME/.config/aliasrc
+[ -f $HOME/.fzf.bash ]                         && source $HOME/.fzf.bash
+[ -f $HOME/.config/broot/launcher/bash/br ]    && source $HOME/.config/broot/launcher/bash/br
+[ -f /usr/local/bin/virtualenvwrapper.sh ]     && source /usr/local/bin/virtualenvwrapper.sh 

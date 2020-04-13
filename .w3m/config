@@ -77,16 +77,16 @@ index_file
 mime_types ~/.w3m/mime.types, /etc/mime.types
 mailcap ~/.w3m/mailcap, /etc/w3m/mailcap, /etc/mailcap
 urimethodmap ~/.w3m/urimethodmap, /etc/w3m/urimethodmap
-editor sensible-editor
+editor emacsclient
 mailto_options 1
-mailer xdg-open mailto:%s
+mailer mail mailto:%s
 extbrowser
-extbrowser2 tsp $VIDEOVIEWER %s &
-extbrowser3 $IMAGEVIEWER %s &
+extbrowser2 tsp $IMAGEVIEWER %s &
+extbrowser3 tsp $VIDEOPLAYER %s &
 extbrowser4 tsp aria2c -j 1 -x 2 -c -d ~/Downloads %s &
 extbrowser5 tsp wget -c -P ~/Downloads %s &
-extbrowser6 tsp curl -L -O -C - %s &
-extbrowser7 $GBROWSER %s &
+extbrowser6 $GBROWSER %s &
+extbrowser7
 extbrowser8
 extbrowser9
 bgextviewer 1
