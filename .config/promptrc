@@ -170,6 +170,7 @@ prompt_ps(){
 	if (( ifnewline == 1 )); then
 		PS1+="\\[${bold}\\]\\n" # newline
 	fi
+	[ -z "$VIRTUAL_ENV" ] || PS1+="\\[${cyan}\\][$(echo $VIRTUAL_ENV | rev | cut -d/ -f1 | rev)] "
 	PS1+="\\[${userStyle}\\]\\u" # username
 	PS1+="\\[${white}\\] at "
 	PS1+="\\[${hostStyle}\\]\\h" # host

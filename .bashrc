@@ -147,3 +147,6 @@ fi
 [ -f $HOME/.fzf.bash ]                         && source $HOME/.fzf.bash
 [ -f $HOME/.config/broot/launcher/bash/br ]    && source $HOME/.config/broot/launcher/bash/br
 [ -f /usr/local/bin/virtualenvwrapper.sh ]     && source /usr/local/bin/virtualenvwrapper.sh 
+[ -f /usr/share/virtualenvwrapper/virtualenvwrapper.sh ] && source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+
+[ -z "$DISPLAY" ] || setxkbmap -option caps:super

@@ -11,7 +11,7 @@ do
 	elif [ -f "$batt/energy_now" ]; then
 		percentage=$(cat "$batt/energy_full" "$batt/energy_now" | tr "\\n" " " | awk '{printf "%.2f", $2/$1*100}')
 	fi
-    [ $(cat "$batt/subsystem/AC/online") -eq 1 ] && line='+' || line=""
+    [ $(cat $batt/subsystem/AC*/online) -eq 1 ] && line='🗲 ' || line=""
     result="$result $name $line$percentage%"
 done
 

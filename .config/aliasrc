@@ -18,7 +18,6 @@ alias ..2="cd ../.."
 alias ..3="cd ../../.."
 alias ..4="cd ../../../.."
 alias ..5="cd ../../../../.."
-alias sudo='sudo ' # sudo to work with aliases
 alias ls="ls -lhF --color=always"
 alias la="ls -lah --color=always"
 alias ll="ls -lah --color=always"
@@ -95,28 +94,35 @@ s-ducky() {
 	$TBROWSER $(echo "https://www.duckduckgo.com/?q=\! $@" | sed "s/ /+/g")
 }
 
+if command -v doas >/dev/null 2>&1; then
+	root_cmd='doas'
+else
+	root_cmd='sudo'
+fi
+alias sudo="$root_cmd " # sudo to work with aliases
+
 if command -v pacman >/dev/null 2>&1; then
 	echo "Using PACMAN package manager"
-	alias paci="pacman -S"
-	alias pacr="pacman -Rs"
-	alias pacs="pacman -Ss"
-	alias pacu="pacman -Syu"
-	alias pacc="pacman -Sc; pacman -Qdtq | pacman -Rs -"
-	alias pacl="pacman -Q"
-	alias pacl-auto="pacman -Qd"
-	alias pacl-manual="pacman -Qe"
+	alias paci="$root_cmd pacman -S"
+	alias pacr="$root_cmd pacman -Rs"
+	alias pacs="$root_cmd pacman -Ss"
+	alias pacu="$root_cmd pacman -Syu"
+	alias pacc="$root_cmd pacman -Sc; $root_cmd pacman -Qdtq | $root_cmd pacman -Rs -"
+	alias pacl="$root_cmd pacman -Q"
+	alias pacl-auto="$root_cmd pacman -Qd"
+	alias pacl-manual="$root_cmd pacman -Qe"
 elif command -v apt >/dev/null 2>&1; then
 	echo "Using APT package manager"
-	alias paci="apt install"
-	alias paci-deb="dpkg -i"
-	alias pacr="apt purge"
-	alias pacs="apt search"
-	alias pacu="apt update && apt upgrade"
-	alias pacc="apt autoclean && apt autoremove"
-	alias pacl="dpkg -l"
-	alias pacl-auto="apt-mark showauto"
-	alias pacl-manual="apt-mark showmanual"
-	alias pac-auto2manual="apt-mark showauto | xargs -n 1 apt-mark manual"
+	alias paci="$root_cmd apt install"
+	alias paci-deb="$root_cmd dpkg -i"
+	alias pacr="$root_cmd apt purge"
+	alias pacs="$root_cmd apt search"
+	alias pacu="$root_cmd apt update && $root_cmd apt upgrade"
+	alias pacc="$root_cmd apt autoclean && $root_cmd apt autoremove"
+	alias pacl="$root_cmd dpkg -l"
+	alias pacl-auto="$root_cmd apt-mark showauto"
+	alias pacl-manual="$root_cmd apt-mark showmanual"
+	alias pac-auto2manual="$root_cmd apt-mark showauto | xargs -n 1 $root_cmd apt-mark manual"
 fi
 
 if command -v emacs-nox >/dev/null 2>&1; then
@@ -187,13 +193,13 @@ fi
 
 
 if command -v tmux >/dev/null 2>&1; then
-	TMUX_CMD="tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
-	alias tt="$TMUX_CMD attach-session || $TMUX_CMD"
-	alias tmuxi="$TMUX_CMD attach-session || $TMUX_CMD"
-	alias tmuxk="$TMUX_CMD kill-session -t"
-	alias tmuxn="$TMUX_CMD new-session -s"
-	alias tmuxl="$TMUX_CMD list-sessions"
-	alias tmuxa="$TMUX_CMD -2 attach-session -d -t"
+	tmux_cmd="tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
+	alias tt="$tmux_cmd attach-session || $tmux_cmd"
+	alias tmuxi="$tmux_cmd attach-session || $tmux_cmd"
+	alias tmuxk="$tmux_cmd kill-session -t"
+	alias tmuxn="$tmux_cmd new-session -s"
+	alias tmuxl="$tmux_cmd list-sessions"
+	alias tmuxa="$tmux_cmd -2 attach-session -d -t"
 else
 	echo "TMUX is not installed"
 fi
