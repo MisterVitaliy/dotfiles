@@ -8,7 +8,7 @@
 INSTALL_DIR=$(HOME)/Documents
 
 ESSENTIAL=bash bash-completion curl build-essential ca-certificates fdisk git wget shellcheck w3m ripgrep htop task-spooler aria2
-ESSENTIALX=i3 dwm mpd mpv mpc feh scrot
+ESSENTIALX=i3 dwm mpd mpv mpc feh scrot zathura zathura-pdf-poppler
 GEEKY=fd-find aspell aspell-en aspell-ru aspell-uk aspell-pl openssh-client ranger emacs-nox exuberant-ctags fzf sox youtube-dl
 PYTHON=flycheck-doc pylint python-pip python3 python3-dev python3-pip python3-tk virtualenvwrapper
 FLEX=bison flex-old
@@ -62,6 +62,7 @@ geeky-remove: ## remove geeky utils
 
 python-install: ## install python
 	sudo apt install $(PYTHON) -y
+	pip3 install -U python-language-server[all] youtube-dl
 python-remove: ## remove python
 	sudo apt purge $(PYTHON) -y
 python-fix: ## set default python version to 3.7

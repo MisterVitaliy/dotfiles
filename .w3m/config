@@ -83,10 +83,10 @@ mailer mail mailto:%s
 extbrowser
 extbrowser2 tsp $IMAGEVIEWER %s &
 extbrowser3 tsp $VIDEOPLAYER %s &
-extbrowser4 tsp aria2c -j 1 -x 2 -c -d ~/Downloads %s &
-extbrowser5 tsp wget -c -P ~/Downloads %s &
-extbrowser6 $GBROWSER %s &
-extbrowser7
+extbrowser4 tsp zathura %s &
+extbrowser5 tsp aria2c -j 1 -x 2 -c -d ~/Downloads %s &
+extbrowser6 tsp wget -c -P ~/Downloads %s &
+extbrowser7 $GBROWSER %s &
 extbrowser8
 extbrowser9
 bgextviewer 1

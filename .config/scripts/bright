@@ -6,14 +6,21 @@ else
 	screen=$(xrandr | grep " connected" | cut -f1 -d" ")
 	bright=$(xrandr --verbose -q | grep -A 5 "$screen" | grep -i brightness | awk '{print $2}')
 	if [ "$1" = "inc" ]; then
-		res=$(echo "scale=2; var=($bright+($2/100));var" | bc)
+		res=$(echo "$bright $2" | awk '{printf "%.2f", $1+($2/100)}')
 	elif [ "$1" = "dec" ]; then
-		res=$(echo "scale=2; var=($bright-($2/100));var" | bc)
+		res=$(echo "$bright $2" | awk '{printf "%.2f", $1-($2/100)}')
 	else
-		bright=$(echo "$bright*100" | bc)
+		bright=$(echo "$bright" | awk '{printf "%d", $1*100}')
 		echo "$bright%"
 		exit 0
 	fi
-	res=$(echo "if($res<1) print 0; if($res>1.0) 1.0 else if($res>0) $res" | bc)
+	res=$(echo "$res" | awk '{
+			   		  		if($1<0.0)
+								print "0.0"
+						    else if($1>1.0)
+						        print "1.0"
+							else
+								printf "%.2f", $1
+			   		  	 }' )
 	xrandr --output "$screen" --brightness "$res"
 fi

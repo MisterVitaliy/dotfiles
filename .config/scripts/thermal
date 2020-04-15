@@ -1,12 +1,9 @@
-#!/bin/bash
-
+#!/bin/sh
 result=""
-
 for therm in /sys/class/thermal/thermal_zone*
 do
-    temp=$(awk '{ printf "%.1f", $1/1000 }' $therm/temp)
-    type=$(cat $therm/type)
+    temp=$(awk '{ printf "%.1f", $1/1000 }' "$therm"/temp)
+    type=$(cat "$therm"/type)
     result="$result  $type(${temp}𝇈C)"
 done
-
-echo $result
+echo "$result"
