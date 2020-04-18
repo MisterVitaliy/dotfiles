@@ -1,0 +1,10 @@
+#!/bin/sh
+betterlockscreen -u ~/.config/wall.*
+betterlockscreen -w
+# feh --bg-scale ~/Downloads/franxx.jpg &
+compton &
+xautolock -time 10 -locker "betterlockscreen -l dimblur" -corners 0--- &
+nm-applet &
+volumeicon &
+
+dwm
