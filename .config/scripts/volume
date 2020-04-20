@@ -1,25 +1,21 @@
 #!/bin/sh
+
+command -v pulsemixer >/dev/null 2>&1 || (echo "This script need pulsemixer to work properly" && exit 0)
+
 if [ "$1" = "inc" ]; then
-	amixer set Master "$2"%+ > /dev/null 2>&1; notify-send ":VOLUME:" "$($0)"
+	pulsemixer --change-volume +"$2" >/dev/null 2>&1
 elif [ "$1" = "dec" ]; then
-	amixer set Master "$2"%- > /dev/null 2>&1; notify-send ":VOLUME:" "$($0)"
+	pulsemixer --change-volume -"$2" >/dev/null 2>&1
 elif [ "$1" = "toggle" ]; then
-	amixer set Master toggle > /dev/null 2>&1; notify-send ":VOLUME:" "$($0)"
+	pulsemixer --toogle-mute >/dev/null 2>&1
 else
-	amixer get Master >/dev/null 2>&1
-	RESULT=$?
-	if [ $RESULT -eq 0 ]; then
-		mute=$(amixer get Master | grep -Eo "\[(on|off)\]")
-		volumes=$(amixer get Master | grep -Eo "[0-9]{1,3}%")
-		if [ "$mute" = "[on]" ]; then
-			mute="+"
-		else
-			mute="\-\-"
-		fi
-		echo "$mute $volumes"
-		exit 0
+	volume=$(echo $(pulsemixer --get-volume) | awk '{printf "L:%d R:%d", $1, $2}')
+	mute=$(pulsemixer --get-mute)
+	if [ $mute -eq 0 ]; then
+		mute=""
 	else
-		echo "no display"
-		exit 0
+		mute="[mute]"
 	fi
+	echo "$mute$volume"
+	exit 0
 fi
