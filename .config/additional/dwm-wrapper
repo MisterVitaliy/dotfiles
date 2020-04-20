@@ -1,10 +1,17 @@
 #!/bin/sh
+
+# pulseaudio -D
 betterlockscreen -u ~/.config/wall.*
 betterlockscreen -w
-# feh --bg-scale ~/Downloads/franxx.jpg &
+# feh --bg-scale ~/.config/wall.* &
 compton &
 xautolock -time 10 -locker "betterlockscreen -l dimblur" -corners 0--- &
 nm-applet &
-volumeicon &
+# volumeicon &
 
-dwm
+while true; do
+   xsetroot -name " | $(keyboard) | $(bright) | $(volume) | $(ram) | $(battery) | $( date +"%F %R" ) | "
+   sleep 3m
+done &
+ 
+exec dwm

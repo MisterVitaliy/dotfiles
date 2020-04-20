@@ -7,14 +7,16 @@ if [ "$1" = "inc" ]; then
 elif [ "$1" = "dec" ]; then
 	pulsemixer --change-volume -"$2" >/dev/null 2>&1
 elif [ "$1" = "toggle" ]; then
-	pulsemixer --toogle-mute >/dev/null 2>&1
+	pulsemixer --toggle-mute >/dev/null 2>&1
+elif [ "$1" = "mute" ]; then
+	pulsemixer --toggle-mute >/dev/null 2>&1
 else
 	volume=$(echo $(pulsemixer --get-volume) | awk '{printf "L:%d R:%d", $1, $2}')
 	mute=$(pulsemixer --get-mute)
 	if [ $mute -eq 0 ]; then
 		mute=""
 	else
-		mute="[mute]"
+		mute="[mute] "
 	fi
 	echo "$mute$volume"
 	exit 0

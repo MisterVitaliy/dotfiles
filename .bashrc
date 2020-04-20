@@ -37,7 +37,7 @@ shopt -s shift_verbose
 export SHELL=/bin/bash
 export EDITOR=emacsclient
 export TBROWSER=w3m
-export TERMINAL=xterm
+export TERMINAL=st
 export READER=zathura
 export VIDEOPLAYER=mpv
 export IMAGEVIEWER=feh

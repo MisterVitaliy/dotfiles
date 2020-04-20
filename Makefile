@@ -7,9 +7,9 @@
 
 INSTALL_DIR=$(HOME)/Documents
 
-ESSENTIAL=bash bash-completion curl build-essential ca-certificates fdisk git wget shellcheck w3m ripgrep htop task-spooler aria2
-ESSENTIALX=mpv feh scrot zathura zathura-pdf-poppler sxhkd xautolock
-GEEKY=fd-find aspell aspell-en aspell-ru aspell-uk aspell-pl openssh-client ranger emacs-nox exuberant-ctags fzf sox youtube-dl
+ESSENTIAL=bash bash-completion curl build-essential ca-certificates fdisk git wget shellcheck w3m ripgrep htop task-spooler aria2 network-manager powertop hwinfo
+ESSENTIALX=mpv feh scrot zathura zathura-pdf-poppler sxhkd xautolock libnotify-bin
+GEEKY=fd-find aspell aspell-en aspell-ru aspell-uk aspell-pl openssh-client ranger emacs-nox exuberant-ctags fzf sox youtube-dl pulsemixer
 PYTHON=flycheck-doc pylint python-pip python3 python3-dev python3-pip python3-tk virtualenvwrapper
 FLEX=bison flex-old
 GAMES=cataclysm-dda-curses crawl nethack-console nethack-spoilers slashem dwarf-fortress
